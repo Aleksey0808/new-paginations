@@ -1,7 +1,3 @@
-export const obj = {
-  yser: 'name',
-};
-
 function searchVCharacters(pageNumber = 1) {
   const URL = `https://the-one-api.dev/v2/character?limit=20&page=${pageNumber}`;
   const options = {
@@ -13,5 +9,3 @@ function searchVCharacters(pageNumber = 1) {
 }
 
 export default searchVCharacters;
-
-// Authorization: 'Bearer 3sru3q0Sisxo4TsZOe23',

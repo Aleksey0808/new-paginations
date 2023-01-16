@@ -5,7 +5,8 @@ const list = document.querySelector('.cards');
 
 export function createMarkup(arr) {
   const markup = arr.reduce(
-    (acc, { name, race }) => acc + `<li><h2>${name}</h2><h3>${race}</h3></li>`
+    (acc, { name, race }) => acc + `<li><h2>${name}</h2><h3>${race}</h3></li>`,
+    ''
   );
   list.innerHTML = markup;
 }
