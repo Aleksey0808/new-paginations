@@ -1,13 +1,14 @@
 import fetchLord from './fetchLord';
-import { creatMarkup } from '../index';
+import { createMarkup } from '../index';
 
 const paginationBox = document.querySelector('.pagination');
 let globalCurrentPage = 0;
-
-// @param {Number} currentPage
-// @param {Number} allPage
-// return {String} markup
-
+/**
+ *Create pagination
+ * @param {Number} currentPage - current page for search
+ * @param {Number} allPage - all pages for search
+ * @return {String} markup - for pagination
+ */
 export default function pagination(currentPage, allPages) {
   let markup = '';
   let beforeTwoPage = currentPage - 2;
@@ -51,7 +52,7 @@ export default function pagination(currentPage, allPages) {
 paginationBox.addEventListener('click', handlrePagination);
 
 function handlrePagination(evt) {
-  if ((evt.target.nodeName = 'LI')) {
+  if (evt.target.nodeName !== 'LI') {
     return;
   }
   if (evt.target.textContent === '...') {
@@ -59,12 +60,21 @@ function handlrePagination(evt) {
   }
   if (evt.target.textContent === '🡸') {
     fetchLord((globalCurrentPage -= 1)).then(data => {
-      creatMarkup(data.docs);
+      createMarkup(data.docs);
       pagination(data.page, data.pages);
     });
     return;
   }
-  // if () {
-
-  // }
+  if (evt.target.textContent === '🡺') {
+    fetchLord((globalCurrentPage += 1)).then(data => {
+      createMarkup(data.docs);
+      pagination(data.page, data.pages);
+    });
+    return;
+  }
+  const page = evt.target.textContent;
+  fetchLord(page).then(data => {
+    createMarkup(data.docs);
+    pagination(data.page, data.pages);
+  });
 }

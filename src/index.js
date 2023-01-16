@@ -3,7 +3,7 @@ import searchVCharacters from './js/fetchLord';
 
 const list = document.querySelector('.cards');
 
-export function currentMarkup(arr) {
+export function createMarkup(arr) {
   const markup = arr.reduce(
     (acc, { name, race }) => acc + `<li><h2>${name}</h2><h3>${race}</h3></li>`
   );
@@ -11,6 +11,7 @@ export function currentMarkup(arr) {
 }
 
 searchVCharacters().then(data => {
+  console.log(data);
   createMarkup(data.docs);
   pagination(data.page, data.pages);
 });
