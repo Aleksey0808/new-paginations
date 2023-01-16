@@ -1,5 +1,5 @@
 import fetchLord from './fetchLord';
-import creatMarkup from './createMarkup';
+import { creatMarkup } from '../index';
 
 const paginationBox = document.querySelector('.pagination');
 let globalCurrentPage = 0;
@@ -46,4 +46,25 @@ export default function pagination(currentPage, allPages) {
     markup += `<li>&#129146;</li>`;
   }
   paginationBox.innerHTML = markup;
+}
+
+paginationBox.addEventListener('click', handlrePagination);
+
+function handlrePagination(evt) {
+  if ((evt.target.nodeName = 'LI')) {
+    return;
+  }
+  if (evt.target.textContent === '...') {
+    return;
+  }
+  if (evt.target.textContent === '🡸') {
+    fetchLord((globalCurrentPage -= 1)).then(data => {
+      creatMarkup(data.docs);
+      pagination(data.page, data.pages);
+    });
+    return;
+  }
+  // if () {
+
+  // }
 }
